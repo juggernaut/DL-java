@@ -31,6 +31,6 @@ public class Interruption {
         final Resource beforeResourceRemaining = table.getValue(numOversRemaining, scoreOnInterruption.getWickets());
         final Resource afterResourceRemaining = table.getValue(numOversRemaining.subtract(numOversLost),
                 scoreOnInterruption.getWickets());
-        return afterResourceRemaining.subtract(beforeResourceRemaining);
+        return beforeResourceRemaining.subtract(afterResourceRemaining);
     }
 }
