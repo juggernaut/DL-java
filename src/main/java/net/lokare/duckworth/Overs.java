@@ -47,7 +47,11 @@ public class Overs {
         if (that.getOvers() > this.getOvers()) {
             throw new IllegalArgumentException();
         }
-        return Overs.of(this.getOvers() - that.getOvers());
+        if (this.balls >= that.balls) {
+            return Overs.of(this.overs - that.overs, this.balls - that.balls);
+        } else {
+            return Overs.of(this.overs - (that.overs + 1), this.balls - (6 - that.balls));
+        }
     }
 
     @Override

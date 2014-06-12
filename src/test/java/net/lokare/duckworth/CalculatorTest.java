@@ -2,6 +2,7 @@ package net.lokare.duckworth;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.hamcrest.core.Is.is;
@@ -46,15 +47,47 @@ public class CalculatorTest {
         assertThat(calculator.getRevisedTarget().getRuns(), is(218));
     }
 
-    /*
     @Test
     public void testExample4() {
         final Innings team1 = new Innings(Overs.of(50), Collections.<Interruption>emptyList(),
                 new Score(Runs.of(250), Wickets.of(10)));
         final Interruption interruption1 = new Interruption(new Score(Runs.of(40), Wickets.of(1)), Overs.of(38),
                 Overs.of(10), ResourceTables.getStandardEdition());
-        final Interruption interruption2 = new Interruption(new Score(Runs.of(98), Wickets.of(3)))
-
+        final Interruption interruption2 = new Interruption(new Score(Runs.of(98), Wickets.of(3)), Overs.of(18),
+                Overs.of(2), ResourceTables.getStandardEdition());
+        final Interruption interruption3 = new Interruption(new Score(Runs.of(154), Wickets.of(6)), Overs.of(7, 4),
+                Overs.of(7, 4), ResourceTables.getStandardEdition());
+        final Innings team2 = new Innings(Overs.of(50), Arrays.asList(interruption1, interruption2, interruption3),
+                null);
+        DLCalculator calculator = new DLCalculator(team1, team2);
+        // NOTE: par score is 159, target is 160
+        assertThat(calculator.getRevisedTarget().getRuns(), is(160));
     }
-    */
+
+    /**
+     * India vs Pakistan, Singapore, April 1996
+     */
+    @Test
+    public void testExample5() {
+        final Interruption interruption1 = new Interruption(new Score(Runs.of(226), Wickets.of(8)), Overs.of(2, 5),
+                Overs.of(2, 5), ResourceTables.getStandardEdition());
+        final Innings team1 = new Innings(Overs.of(50), Collections.singletonList(interruption1),
+                new Score(Runs.of(226), Wickets.of(8)));
+        final Innings team2 = new Innings(Overs.of(33), Collections.<Interruption>emptyList(), null);
+        DLCalculator calculator = new DLCalculator(team1, team2);
+        assertThat(calculator.getRevisedTarget().getRuns(), is(194));
+    }
+
+    @Test
+    public void testExample6() {
+        final Interruption interruption1 = new Interruption(new Score(Runs.of(226), Wickets.of(8)), Overs.of(2, 5),
+                Overs.of(2, 5), ResourceTables.getStandardEdition());
+        final Innings team1 = new Innings(Overs.of(50), Collections.singletonList(interruption1),
+                new Score(Runs.of(226), Wickets.of(8)));
+        final Interruption interruption2 = new Interruption(new Score(Runs.of(140), Wickets.of(2)), Overs.of(8),
+                Overs.of(5), ResourceTables.getStandardEdition());
+        final Innings team2 = new Innings(Overs.of(33), Collections.singletonList(interruption2), null);
+        DLCalculator calculator = new DLCalculator(team1, team2);
+        assertThat(calculator.getRevisedTarget().getRuns(), is(158));
+    }
 }
