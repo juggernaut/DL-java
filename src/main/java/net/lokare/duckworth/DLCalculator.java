@@ -38,7 +38,7 @@ public class DLCalculator {
         final Resource r1 = team1.getFinalResourceAvailable();
         final Resource r2 = team2.getFinalResourceAvailable();
         assert r2.compareTo(r1) < 0;
-        final float runs = r2.getResource().divide(r1.getResource()).floatValue() * team1.getFinalScore().getRuns()
+        final float runs = r2.getResource().floatValue() / r1.getResource().floatValue() * team1.getFinalScore().getRuns()
                 .getRuns() + 1;
         return Runs.of((int) Math.floor(runs));
     }

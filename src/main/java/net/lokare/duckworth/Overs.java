@@ -6,16 +6,29 @@ package net.lokare.duckworth;
 public class Overs {
 
     private final int overs;
+    private final int balls;
 
-    public Overs(final int overs) {
-        this.overs = validate(overs);
+    public Overs(final int overs, final int balls) {
+        this.overs = validateOvers(overs);
+        this.balls = validateBalls(balls);
     }
 
-    private static int validate(final int overs) {
+    public Overs(final int overs) {
+        this(overs, 0);
+    }
+
+    private static int validateOvers(final int overs) {
         if (overs >= 0 && overs <= 50) {
             return overs;
         }
         throw new IllegalArgumentException("overs must be >= 0 and <= 50");
+    }
+
+    private static int validateBalls(final int balls) {
+        if (balls >= 0 && balls <= 5) {
+            return balls;
+        }
+        throw new IllegalArgumentException("balls must be >= 0 and <= 5");
     }
 
     public int getOvers() {
@@ -24,6 +37,10 @@ public class Overs {
 
     public static Overs of(final int overs) {
         return new Overs(overs);
+    }
+
+    public static Overs of(final int overs, final int balls) {
+        return new Overs(overs, balls);
     }
 
     public Overs subtract(final Overs that) {
@@ -40,9 +57,7 @@ public class Overs {
 
         final Overs overs1 = (Overs) o;
 
-        if (overs != overs1.overs) return false;
-
-        return true;
+        return overs == overs1.overs && balls == overs1.balls;
     }
 
     @Override
