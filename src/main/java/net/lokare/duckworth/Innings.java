@@ -1,6 +1,7 @@
 package net.lokare.duckworth;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,6 +27,10 @@ public class Innings {
         this(ResourceTables.getStandardEdition(), allocated, interruptions, finalScore);
     }
 
+    public Innings(final Overs allocated) {
+        this(allocated, Collections.<Interruption>emptyList(), new Score(Runs.of(0), Wickets.of(0)));
+    }
+
     public Resource getFinalResourceAvailable() {
         Resource totalLost = new Resource(new BigDecimal(0));
         for (final Interruption interruption: interruptions) {
@@ -39,5 +44,9 @@ public class Innings {
 
     public Score getFinalScore() {
         return finalScore;
+    }
+
+    public List<Interruption> getInterruptions() {
+        return interruptions;
     }
 }

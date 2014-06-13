@@ -90,4 +90,21 @@ public class CalculatorTest {
         DLCalculator calculator = new DLCalculator(team1, team2);
         assertThat(calculator.getRevisedTarget().getRuns(), is(158));
     }
+
+    /**
+     * Heart breaking game in the 2003 world cup when RSA reached the par score to tie the game,
+     * but Mark Boucher defended the last ball thinking the par score was a "victory" score.
+     */
+    @Test
+    public void testSriLankavsSouthAfrica() {
+        final Innings sriLanka = new Innings(Overs.of(50), Collections.<Interruption>emptyList(),
+                new Score(Runs.of(268), Wickets.of(9)));
+        final Interruption interruption = new Interruption(new Score(Runs.of(229), Wickets.of(6)), Overs.of(5),
+                Overs.of(5), ResourceTables.getStandardEdition());
+        final Innings southAfrica = new Innings(Overs.of(50), Collections.singletonList(interruption),
+                new Score(Runs.of(229), Wickets.of(6)));
+        DLCalculator calculator = new DLCalculator(sriLanka, southAfrica);
+        assertThat(calculator.getRevisedTarget().getRuns(), is(230));
+
+    }
 }

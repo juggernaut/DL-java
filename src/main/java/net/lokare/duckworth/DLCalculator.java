@@ -1,5 +1,7 @@
 package net.lokare.duckworth;
 
+import java.util.Objects;
+
 /**
  * @author ameya
  */
@@ -13,9 +15,10 @@ public class DLCalculator {
     private final Innings team2;
 
     public DLCalculator(final Runs g50, final Innings team1, final Innings team2) {
-        this.G50 = g50;
-        this.team1 = team1;
-        this.team2 = team2;
+        this.G50 = Objects.requireNonNull(g50);
+        this.team1 = Objects.requireNonNull(team1);
+        Objects.requireNonNull(this.team1.getFinalScore(), "final score for team 1 must be specified");
+        this.team2 = Objects.requireNonNull(team2);
     }
 
     public DLCalculator(final Innings team1, final Innings team2) {
