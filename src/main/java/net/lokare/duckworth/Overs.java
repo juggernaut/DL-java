@@ -50,7 +50,7 @@ public class Overs {
         if (this.balls >= that.balls) {
             return Overs.of(this.overs - that.overs, this.balls - that.balls);
         } else {
-            return Overs.of(this.overs - (that.overs + 1), this.balls - (6 - that.balls));
+            return Overs.of(this.overs - (that.overs + 1), this.balls + (6 - that.balls));
         }
     }
 
