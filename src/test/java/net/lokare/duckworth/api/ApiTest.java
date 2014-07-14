@@ -39,4 +39,15 @@ public class ApiTest {
         DLCalculator calculator = new DLCalculator(team1, team2);
         assertThat(calculator.getRevisedTarget().getRuns(), is(158));
     }
+
+    @Test
+    public void testSriLankavsSouthAfrica() {
+        final InningsBuilder builder = InningsBuilder.forAllottedOvers(50);
+        final Innings sriLanka = builder.ended(atScore(runs(268), down(9))).build();
+        final InningsBuilder builder2 = InningsBuilder.forAllottedOvers(50);
+        final Innings southAfrica = builder2.interrupted(atScore(runs(229), down(6)), in(45), lost(5)).build();
+        final DLCalculator calculator = new DLCalculator(sriLanka, southAfrica);
+        assertThat(calculator.getRevisedTarget().getRuns(), is(230));
+
+    }
 }
