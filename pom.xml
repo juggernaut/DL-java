@@ -45,17 +45,18 @@
                 <configuration>
                     <license>GPL (c) 2014</license>
                     <distribution>Duckworth</distribution>
+                    <group>Libraries</group>
                     <packager>Ameya Lokare</packager>
                     <prefix>/usr/local</prefix>
                     <mappings>
                         <mapping>
                             <directory>/usr/local/dl-java</directory>
-                            <filemode>440</filemode>
-                            <username>dumper</username>
-                            <groupname>dumpgroup</groupname>
+                            <filemode>755</filemode>
+                            <username>root</username>
+                            <groupname>root</groupname>
                             <sources>
                                 <source>
-                                    <location>target/duckworth-${version}.jar</location>
+                                    <location>target/duckworth-${project.version}.jar</location>
                                 </source>
                             </sources>
                         </mapping>
